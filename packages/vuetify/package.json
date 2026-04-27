@@ -144,9 +144,11 @@
     "test:screen": "node ../../scripts/tdd-run.js ",
     "test:all": "concurrently -gr 'vitest --project unit' 'vitest --project browser --shard=1/5' 'vitest --project browser --shard=2/5' 'vitest --project browser --shard=3/5' 'vitest --project browser --shard=4/5' 'vitest --project browser --shard=5/5'",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
-    "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\""
+    "lint:fix": "concurrently -n \"tsc,eslint\" \"tsgo -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\"",
+    "chromatic": "chromatic --vitest --project-token=$CHROMATIC_PROJECT_TOKEN"
   },
   "devDependencies": {
+    "@chromatic-com/vitest": "0.0.2",
     "@date-io/core": "3.2.0",
     "@date-io/date-fns": "3.2.1",
     "@date-io/dayjs": "^3.2.0",
@@ -181,6 +183,7 @@
     "babel-plugin-module-resolver": "^5.0.2",
     "babel-plugin-transform-define": "^2.1.4",
     "babel-polyfill": "^6.26.0",
+    "chromatic": "^16.4.0",
     "cssnano": "^7.1.2",
     "csstype": "^3.2.3",
     "cy-mobile-commands": "^0.3.0",

@@ -23,6 +23,7 @@ minimumReleaseAgeExclude:
   - playwright
   - playwright-core
   - '@vizzly-testing/vitest@0.1.1'
+  - '@chromatic-com/vitest'
 
 nodeLinker: hoisted
 

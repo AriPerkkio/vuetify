@@ -1,6 +1,7 @@
 import { defineConfig, mergeConfig } from 'vitest/config'
 import { playwright } from '@vitest/browser-playwright'
 import { vizzlyPlugin } from '@vizzly-testing/vitest'
+import { chromaticPlugin } from '@chromatic-com/vitest/plugin'
 import viteConfig from './vite.config'
 import AutoImport from 'unplugin-auto-import/vite'
 import { fileURLToPath } from 'node:url'
@@ -24,6 +25,7 @@ export default defineConfig(configEnv => {
       },
       plugins: [
         vizzlyPlugin(),
+        chromaticPlugin({ disableAutoSnapshot: true, outputDirectory: '../.vitest/chromatic' }), // outputDirectory will be properly set in next patch
         AutoImport({
           include: '**/*.spec.?(browser.)@(ts|tsx)',
           imports: {
@@ -71,6 +73,7 @@ export default defineConfig(configEnv => {
               alias: {
                 // Vite logs a warning for this even if we just re-export it without using anything
                 'vitest/browser': fileURLToPath(new URL('test/contextStub.ts', import.meta.url)),
+                '@chromatic-com/vitest': fileURLToPath(new URL('test/contextStub.ts', import.meta.url)),
               },
             },
             test: {

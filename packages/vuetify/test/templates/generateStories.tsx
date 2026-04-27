@@ -8,6 +8,7 @@ import type { FunctionalComponent } from 'vue'
 import type { JSXComponent } from '@/util'
 import { describe, expect, it } from 'vitest'
 import { page } from 'vitest/browser'
+import { takeSnapshot } from '@chromatic-com/vitest'
 import { render, waitIdle } from '@test'
 
 type Stories = Record<string, JSX.Element>
@@ -165,6 +166,7 @@ export const showcase = ({ props, stories, component }: GenerateConfiguration) =
 
       await page.viewport({ mobile: 600, desktop: 1280 }[device], document.body.scrollHeight)
       await waitIdle()
+      await takeSnapshot(`${theme}-${device}-${name.trim()}`);
       await expect.soft(page).toMatchScreenshot(name.trim(), {
         properties: { device, theme },
       })
